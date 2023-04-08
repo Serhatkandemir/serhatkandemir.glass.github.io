@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+p {
+    padding: 20px;
+}
+
+span {
+    padding: 0 25px;
+}
+
+.result {
+    padding: 200px 0;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    min-width: 100vw; min-height: 100vh;
+    background: #282c34;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+form {
+    margin: auto;
+    padding: 200px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#firstForm, #secondForm{
+    width: 250px;
+    height: 260px;
+}
+
+#secondForm {
+    display: none;
+}
+
+#thirdForm {
+    width: 800px;
+}
+
+label {
+    margin: 0 auto;
+    padding: 5px;
+}
+
+input {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    background: white;
+}
+
+form div {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 5px 25px;
+    align-items: center;
+}
+#firstForm input[type = radio] {
+    cursor: pointer;
+    padding: 0;
+    transform: scale(1.5);
+}
+
+form input[type=range] {
+    cursor: pointer;
+    padding: 0;
+}
+
+#glassWidthId {
+    padding: 5px;
+}
+
+form input[type = submit] {
+    border: none;
+    cursor: pointer;
+    background-color: #0999ecc3;
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+form input[type=submit]:hover {
+    background-color: #0999ec;
+}

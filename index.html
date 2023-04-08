@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" class="rel">
+    <title>Glass</title>
+</head>
+
+<body>
+    <form id="firstForm" onsubmit="submitForm(event)">
+        <label for="carVoltage">Araç Voltajı</label>
+        <input type="number" name="carVoltage" id="carVoltage" required>
+        <label for="glassColor">Cam Rengi</label>
+        <div>
+            <input type="radio" name="glassColor" id="white" value="white" required>
+            <span>Beyaz</span>
+            <input type="radio" name="glassColor" id="green" value="green">
+            <span>Yeşil</span>
+        </div>
+        <label for="glassWidth">Cam Kalınlığı</label>
+        <div>
+            <input type="radio" name="glassWidth" id="glassWidth1" value="5" required>
+            <span>5mm</span>
+            <input type="radio" name="glassWidth" id="glassWidth2" value="4">
+            <span>4mm</span>
+        </div>
+        <input type="submit" name="submit" value="Tamam">
+    </form>
+        
+    <form method="post" id="secondForm" onsubmit="submitForm2(event)">
+        <label for="wireCount">Tel sayısı</label>
+        <input type="number" name="wireCount" required>
+        <input type="submit" name="secondSubmit" value="tamam">
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>
