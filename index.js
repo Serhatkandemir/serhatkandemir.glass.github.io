@@ -304,7 +304,7 @@ function submitForm7(event) {
     }
     for (i = 0; i < circuitCount; i++) {
         system_resistance = parseFloat((system_resistance + resistance_es[i]).toFixed(2));
-        sum_area = sum_area + area[i];
+        sum_area = parseFloat((sum_area + area[i]).toFixed(2));
     }
         system_current = parseFloat((carVoltage / system_resistance).toFixed(2));
         system_power = parseFloat(((carVoltage * carVoltage) / system_resistance).toFixed(2));
