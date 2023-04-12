@@ -41,7 +41,7 @@ form {
     flex-direction: column;
 }
 
-#firstForm, #secondForm{
+#firstForm, #secondForm {
     width: 250px;
     height: 260px;
 }
@@ -51,7 +51,30 @@ form {
 }
 
 #thirdForm {
-    width: 800px;
+    width: 740px;
+}
+
+#fourthForm {
+    display: none;
+    width: 500px;
+}
+
+#fifthForm {
+    display: none;
+    width: 550px;
+}
+
+#fifthForm span {
+    padding: 0;
+}
+
+#sixthForm {
+    display: none;
+    width: 250px;
+}
+
+#seventhForm {
+    width: 650px;
 }
 
 label {
@@ -103,4 +126,26 @@ form input[type = submit] {
 
 form input[type=submit]:hover {
     background-color: #0999ec;
+}
+
+
+#tablo1 {
+    width: 400px;
+}
+
+table {
+    background-color: transparent;
+    border-collapse: collapse;
+    margin-bottom: 80px;
+    width: 800px;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f22b;
 }

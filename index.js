@@ -1,6 +1,12 @@
 var form1 = document.getElementById('firstForm');
 var form2 = document.getElementById('secondForm');
 var form3;
+var form4 = document.getElementById('fourthForm');
+var form5 = document.getElementById('fifthForm');
+var form6 = document.getElementById('sixthForm');
+var form7;
+var minOmage = document.getElementById('minOmage');
+var maxOmage = document.getElementById('maxOmage');
 var i = 0;
 var carVoltage = 0;
 var glassColor = 0;
@@ -17,8 +23,47 @@ var current1_50 = 0;
 var current2_78 = 0;
 var current2_50 = 0;
 var ww;
+var Omage1;
+var Omage2;
+var selectedOmage;
+var circuitCount;
+var circuitHeight = [];
+var circuitWidth = [];
+var interwireDistance = [];
+var area = [];
+var resistance_t = [];
+var resistance_es = [];
+var current = [];
+var power = [];
+var heatPower = [];
+var system_resistance = 0;
+var system_current = 0;
+var sum_area = 0;
+var system_power = 0;
+var system_heatPower = 0;
+var voltage = [];
+
+function updateValues() {
+    var omageValue34 = document.getElementById('omageValueBar');
+    var selectedOmage34 = document.getElementById('selectedOmage');
+    var formattedValue = Number(selectedOmage34.value).toFixed(2);
+    omageValue34.textContent = formattedValue;
 
 
+    var TF1_78rate = document.getElementById('TF1_78rate');
+    var TF1_50rate = document.getElementById('TF1_50rate');
+    var TF2_78rate = document.getElementById('TF2_78rate');
+    var TF2_50rate = document.getElementById('TF2_50rate');
+    var weight1_tf1 = (((formattedValue - tf1_50) / (tf1_78 - tf1_50))*100).toFixed(2);
+    var weight2_tf1 = (100 - weight1_tf1).toFixed(2);
+    var weight1_tf2 = (((formattedValue - tf2_50) / (tf2_78 - tf2_50))*100).toFixed(2);
+    var weight2_tf2 = (100 - weight1_tf2).toFixed(2);
+    // var weightedAvg = (tf1_78 * weight1) + (tf1_50 * weight2);
+    TF1_78rate.textContent = weight1_tf1;
+    TF1_50rate.textContent = weight2_tf1;
+    TF2_78rate.textContent = weight1_tf2;
+    TF2_50rate.textContent = weight2_tf2;
+    }
 
 
 
@@ -30,8 +75,8 @@ function submitForm(event) {
     glassWidth = parseInt(formData.get('glassWidth'), 10);
 
     if (form1.checkValidity()) {
-    form1.setAttribute('style', 'display: none !important');
-    form2.setAttribute('style', 'display: flex !important');
+        form1.setAttribute('style', 'display: none !important');
+        form2.setAttribute('style', 'display: flex !important');
     }
 }
 
@@ -47,9 +92,9 @@ function submitForm2(event) {
     wireCount = parseInt(formData.get('wireCount'), 10);
 
     if (form2.checkValidity()) {
-    form2.setAttribute('style', 'display: none !important');
-    formcreated3();
-    form2.removeEventListener("submit", submitForm2);
+        form2.setAttribute('style', 'display: none !important');
+        formcreated3();
+        form2.removeEventListener("submit", submitForm2);
     }
 }
 
@@ -141,35 +186,387 @@ function submitForm3(event) {
     current2_50 = (carVoltage / sum2_50).toFixed(4);
     if (form3.checkValidity()) {
         form3.setAttribute('style', 'display: none !important');
-        
-        const resultDiv = document.createElement('div');
-        resultDiv.classList.add('result');
 
-        const p1 = document.createElement('p');
-        p1.textContent = ` Toplam TF1 %78ohm degeri: ${sum1_78} Akım degeri: ${current1_78}`;
-        resultDiv.appendChild(p1);
+        minOmage.placeholder = tf1_78.toFixed(2);
+        maxOmage.placeholder = tf1_50.toFixed(2);
 
-        const p2 = document.createElement('p');
-        p2.textContent = ` Toplam TF1 %50ohm degeri: ${sum1_50} Akım degeri: ${current1_50}`;
-        resultDiv.appendChild(p2);
-
-        const p3 = document.createElement('p');
-        p3.textContent = ` Toplam TF2 %78ohm degeri: ${sum2_78} Akım degeri: ${current2_78}`;
-        resultDiv.appendChild(p3);
-
-        const p4 = document.createElement('p');
-        p4.textContent = ` Toplam TF2 %50ohm degeri: ${sum2_50} Akım degeri: ${current2_50}`;
-        resultDiv.appendChild(p4);
-
-        document.body.appendChild(resultDiv);
-        form3.removeEventListener("submit", submitForm3);
+        form4.setAttribute('style', 'display: flex !important');
     }
 }
 
 form3.addEventListener("submit", submitForm3);
 
 
+function submitForm4(event) {
+    event.preventDefault();
+    var formData = new FormData(form4);
+    Omage1 = parseFloat(formData.get('selectedAmountOfOmage1'));
+    Omage2 = parseFloat(formData.get('selectedAmountOfOmage2'));
+    document.getElementById('selectedOmage').min = Omage1;
+    document.getElementById('selectedOmage').max = Omage2;
 
+    if (form4.checkValidity()) {
+        form4.setAttribute('style', 'display: none !important');
+        form5.setAttribute('style', 'display: flex !important');
+    }
+}
+
+form4.addEventListener("submit", submitForm4);
+
+function submitForm5(event) {
+    event.preventDefault();
+    var formData = new FormData(form5);
+    selectedOmage = parseFloat(formData.get('selectedOmage'));
+
+    if (form5.checkValidity()) {
+        form5.setAttribute('style', 'display: none !important');
+        form6.setAttribute('style', 'display: flex !important');
+    }
+}
+
+form5.addEventListener("submit", submitForm5);
+
+function submitForm6(event) {
+    event.preventDefault();
+    var formData = new FormData(form6);
+    circuitCount = parseFloat(formData.get('circuitCount'));
+
+    if (form6.checkValidity()) {
+        form6.setAttribute('style', 'display: none !important');
+        formcreated7();
+        form6.removeEventListener("submit", submitForm6);
+    }
+}
+
+form6.addEventListener("submit", submitForm6);
+
+function formcreated7(){
+    form7 = document.createElement("form");
+    form7.setAttribute("id", "seventhForm");
+    form7.setAttribute("onsubmit", "submitForm7(event)");
+
+
+    for (i = 0; i < circuitCount; i++) {
+        var div = document.createElement("div");
+
+        var label1 = document.createElement("label");
+        label1.setAttribute("for", "circuitWidth" + i);
+        label1.innerHTML = (i + 1) + ". Devre Genisligi";
+        div.appendChild(label1);
+
+        var input1 = document.createElement("input");
+        input1.setAttribute("type", "number");
+        input1.setAttribute("name", "circuitWidth" + i);
+        input1.setAttribute("step", "0.01");
+        input1.setAttribute("required", true);
+        div.appendChild(input1);
+
+        var label2 = document.createElement("label");
+        label2.setAttribute("for", "circuitHeight" + i);
+        label2.innerHTML = (i + 1) + ". Devre Uzunlugu";
+        div.appendChild(label2);
+
+        var input1 = document.createElement("input");
+        input1.setAttribute("type", "number");
+        input1.setAttribute("name", "circuitHeight" + i);
+        input1.setAttribute("step", "0.01");
+        input1.setAttribute("required", true);
+        div.appendChild(input1);
+
+        form7.appendChild(div);
+    }
+
+    var input21 = document.createElement("input");
+    input21.setAttribute("type", "submit");
+    input21.setAttribute("name", "seventhSubmit");
+    input21.setAttribute("value", "tamam");
+    form7.appendChild(input21);
+
+    document.body.appendChild(form7);
+}
+
+function submitForm7(event) {
+    event.preventDefault();
+    var formData = new FormData(form7);
+    
+    for (i = 0; i < circuitCount; i++) {
+            circuitHeight[i] = parseFloat(formData.get('circuitHeight'+ i));
+            circuitWidth[i] = parseFloat(formData.get('circuitWidth'+ i));
+            if(wireCount > 1) {
+                interwireDistance[i] = (circuitHeight[i]/(wireCount - 1)).toFixed(2);
+            }
+            else {
+                interwireDistance[i] = 0;
+            }
+            area[i] = parseFloat(((circuitHeight[i] * circuitWidth[i])/10000).toFixed(2));
+            resistance_t[i] = parseFloat(((selectedOmage * circuitHeight[i]) / 1000).toFixed(2));
+            resistance_es[i] = parseFloat((resistance_t[i] / wireCount).toFixed(2));
+    }
+    for (i = 0; i < circuitCount; i++) {
+        system_resistance = parseFloat((system_resistance + resistance_es[i]).toFixed(2));
+        sum_area = sum_area + area[i];
+    }
+        system_current = parseFloat((carVoltage / system_resistance).toFixed(2));
+        system_power = parseFloat(((carVoltage * carVoltage) / system_resistance).toFixed(2));
+        system_heatPower = parseFloat((system_power / sum_area).toFixed(2));
+    for (i = 0; i < circuitCount; i++) {
+        voltage[i] = parseFloat((carVoltage /(1/(resistance_es[i] / system_resistance))).toFixed(2));
+        current[i] = parseFloat((voltage[i] / resistance_es[i]).toFixed(2));
+        power[i] = parseFloat(((voltage[i] * voltage[i]) / resistance_es[i]).toFixed(2));
+        heatPower[i] = parseFloat((power[i] / area[i]).toFixed(2));
+    }
+
+    if (form7.checkValidity()) {
+        form7.setAttribute('style', 'display: none !important');
+        table1();
+        table2();
+        form7.removeEventListener("submit", submitForm7);
+    }
+}
+
+form7.addEventListener("submit", submitForm7);
+
+
+function table1(){
+    const table = document.createElement("table");
+    table.setAttribute("id", "tablo1");
+
+    var headingRow = document.createElement("tr");
+
+    var heading1 = document.createElement("th");
+    var heading2 = document.createElement("th");
+
+    heading1.innerHTML = "Sistem degerleri";
+    heading2.innerHTML = "";
+
+    headingRow.appendChild(heading1);
+    headingRow.appendChild(heading2);
+
+    table.appendChild(headingRow);
+
+    var tablevalues1 = [
+    ["Gerilim(volt)", carVoltage],
+    ["Sistem direnci(ohm)", system_resistance],
+    ["Sistem akımı(A)", system_current],
+    ["Toplam alan(dm2)", sum_area],
+    ["Güç(w)", system_power],
+    ["Isıtma gücü(w/dm2)", system_heatPower] 
+    ];
+
+    for (var i = 0; i < tablevalues1.length; i++) {
+    var valuerow = document.createElement("tr");
+    
+    var valuerow1 = document.createElement("td");
+    var valuerow2 = document.createElement("td");
+    
+    valuerow1.innerHTML = tablevalues1[i][0];
+    valuerow2.innerHTML = tablevalues1[i][1];
+    
+    valuerow.appendChild(valuerow1);
+    valuerow.appendChild(valuerow2);
+    
+    table.appendChild(valuerow);
+    }
+
+    document.body.appendChild(table);
+}
+
+function table2(){
+
+    const table = document.createElement("table");
+    table.setAttribute("id", "tablo2");
+
+    const headerRow = document.createElement("tr");
+
+    const header1 = document.createElement("th");
+    header1.textContent = "Bölgeler";
+    headerRow.appendChild(header1);
+
+    for (let i = 0; i < circuitCount; i++) {
+        const th = document.createElement("th");
+        th.textContent = "Bölge " + (i + 1);
+        headerRow.appendChild(th);
+    }
+
+    const thead = document.createElement("thead");
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    td.textContent = "Gerilim(V)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = voltage[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "ısıtma gücü(W/dm2)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = heatPower[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "Güç(W)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = power[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "Akım(A)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = current[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "Reş(ohm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = resistance_es[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent =  "Rt(ohm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = resistance_t[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "Seçilen tel kalınlığı(mm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = wireWidth[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "Tel omaj/ 1 mt(ohm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = selectedOmage;
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "alan(dm2)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = area[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "genişlik(mm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = circuitWidth[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "yükseklik(mm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = circuitHeight[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "tel sayısı(adet)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = wireCount;
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.textContent = "tel arası(mm)";
+    tr.appendChild(td);
+
+    for (let j = 0; j < circuitCount; j++) {
+        const td = document.createElement("td");
+        td.textContent = interwireDistance[j];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+
+    table.appendChild(tbody);
+
+    document.body.appendChild(table);
+}
 
 
 

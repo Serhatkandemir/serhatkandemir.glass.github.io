@@ -10,6 +10,8 @@
 </head>
 
 <body>
+
+
     <form id="firstForm" onsubmit="submitForm(event)">
         <label for="carVoltage">Araç Voltajı</label>
         <input type="number" name="carVoltage" id="carVoltage" required>
@@ -35,6 +37,27 @@
         <input type="number" name="wireCount" required>
         <input type="submit" name="secondSubmit" value="tamam">
     </form>
-    <script src="index.js"></script>
+    <form id="fourthForm" onsubmit="submitForm4(event)">
+        <label for="selectedAmountOfOmage">Seçilen omaj aralığı</label>
+        <div>min
+            <input type="number" id="minOmage" placeholder="" name="selectedAmountOfOmage1" step="0.01" required>-
+            <input type="number" id="maxOmage" placeholder="" name="selectedAmountOfOmage2" step="0.01" required>max
+        </div>
+            <input type="submit" name="fourthSubmit" value="tamam">
+    </form>
+    <form id="fifthForm" onsubmit="submitForm5(event)">
+        <div><span>TF1(%78): %<span id="TF1_78rate">00</span> TF1(%50): %<span id="TF1_50rate">00.00</span></div>
+        <div><span>TF2(%78): %<span id="TF2_78rate">00</span> TF2(%50): %<span id="TF2_50rate">00.00</span></div>
+        <label for="selectedOmage">Seçilen omaj: <span id="omageValueBar">0.00</span></label>
+        <input type="range" name="selectedOmage" id="selectedOmage" oninput="updateValues()" step="0.01" required>
+        <input type="submit" name="fifthSubmit" value="tamam">
+    </form>
+    <form id="sixthForm" onsubmit="submitForm6(event)">
+        <label for="circuitCount">Paralel ise 1 bölge, Seri devre ise bölge sayısını belirtiniz:</label>
+        <input type="number" name="circuitCount" min=1 required>
+        <input type="submit" name="sixthSubmit" value="tamam">
+    </form>
+
+<script src="index.js"></script>
 </body>
 </html>
