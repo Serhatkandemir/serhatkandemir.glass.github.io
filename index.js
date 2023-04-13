@@ -293,9 +293,8 @@ function submitForm7(event) {
             circuitHeight[i] = parseFloat(formData.get('circuitHeight'+ i));
             circuitWidth[i] = parseFloat(formData.get('circuitWidth'+ i));
             if(wireCount > 1) {
-                interwireDistance[i] = (circuitHeight[i]/(wireCount - 1)).toFixed(2);
-            }
-            else {
+                interwireDistance[i] = parseFloat((circuitWidth[i]/(wireCount - 1)).toFixed(2));
+            } else {
                 interwireDistance[i] = 0;
             }
             area[i] = parseFloat(((circuitHeight[i] * circuitWidth[i])/10000).toFixed(2));
@@ -479,7 +478,7 @@ function table2(){
 
     for (let j = 0; j < circuitCount; j++) {
         const td = document.createElement("td");
-        td.textContent = wireWidth[j];
+        td.textContent = wireWidth[j];   // duzeltilmesi gerekebilir
         tr.appendChild(td);
     }
 
