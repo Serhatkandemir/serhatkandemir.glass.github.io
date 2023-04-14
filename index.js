@@ -175,20 +175,15 @@ function submitForm3(event) {
         sum2_78 = sum2_78 + tf2_78; 
         sum2_50 = sum2_50 + tf2_50; 
     }
-    sum1_78 = (sum1_78 / wireCount).toFixed(4);
-    sum1_50 = (sum1_50 / wireCount).toFixed(4);
-    sum2_78 = (sum2_78 / wireCount).toFixed(4);
-    sum2_50 = (sum2_50 / wireCount).toFixed(4);
-
-    current1_78 = (carVoltage / sum1_78).toFixed(4);
-    current1_50 = (carVoltage / sum1_50).toFixed(4);
-    current2_78 = (carVoltage / sum2_78).toFixed(4);
-    current2_50 = (carVoltage / sum2_50).toFixed(4);
+    sum1_78 = parseFloat((sum1_78 / wireCount).toFixed(4));
+    sum1_50 = parseFloat((sum1_50 / wireCount).toFixed(4));
+    sum2_78 = parseFloat((sum2_78 / wireCount).toFixed(4));
+    sum2_50 = parseFloat((sum2_50 / wireCount).toFixed(4));
     if (form3.checkValidity()) {
         form3.setAttribute('style', 'display: none !important');
 
-        minOmage.placeholder = tf1_78.toFixed(2);
-        maxOmage.placeholder = tf1_50.toFixed(2);
+        minOmage.placeholder = sum1_78.toFixed(2);
+        maxOmage.placeholder = sum1_50.toFixed(2);
 
         form4.setAttribute('style', 'display: flex !important');
     }
