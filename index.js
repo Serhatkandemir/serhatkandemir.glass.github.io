@@ -114,7 +114,7 @@ function formcreated3(){
 
         var label1 = document.createElement("label");
         label1.setAttribute("for", "wireLength" + i);
-        label1.innerHTML = (i + 1) + ". Tel Uzunluğu";
+        label1.innerHTML = (i + 1) + ". Tel Uzunlugu";
         div.appendChild(label1);
 
         var input1 = document.createElement("input");
@@ -126,7 +126,7 @@ function formcreated3(){
 
         var label2 = document.createElement("label");
         label2.setAttribute("for", "wireWidth" + i);
-        label2.innerHTML = (i + 1) + ". Tel Kalınlığı";
+        label2.innerHTML = (i + 1) + ". Tel Kalınlıgı";
         div.appendChild(label2);
 
         var input2 = document.createElement("input");
@@ -151,7 +151,7 @@ function formcreated3(){
     var input4 = document.createElement("input");
     input4.setAttribute("type", "submit");
     input4.setAttribute("name", "thirdSubmit");
-    input4.setAttribute("value", "tamam");
+    input4.setAttribute("value", "Devam et");
     form3.appendChild(input4);
 
     document.body.appendChild(form3);
@@ -258,7 +258,7 @@ function formcreated7(){
 
         var label2 = document.createElement("label");
         label2.setAttribute("for", "circuitHeight" + i);
-        label2.innerHTML = (i + 1) + ". Devre Uzunlugu";
+        label2.innerHTML = (i + 1) + ". Devre Yuksekligi";
         div.appendChild(label2);
 
         var input1 = document.createElement("input");
@@ -274,7 +274,7 @@ function formcreated7(){
     var input21 = document.createElement("input");
     input21.setAttribute("type", "submit");
     input21.setAttribute("name", "seventhSubmit");
-    input21.setAttribute("value", "tamam");
+    input21.setAttribute("value", "Devam et");
     form7.appendChild(input21);
 
     document.body.appendChild(form7);
